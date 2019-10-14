@@ -32,7 +32,7 @@ def build_argparser():
     argparser.add_argument('-s', '--server', help='Jira server', required=True)
     argparser.add_argument('-u', '--username', help='Jira username (not email)', required=True)
     argparser.add_argument('-p', '--password', help='Jira password', required=True)
-    argparser.add_argument('-o', '--company', help='Only show company email addresses')
+    argparser.add_argument('-c', '--companyemail', help='Filter company email addresses')
     argparser.add_argument('-v', '--verbose', type=str2bool, help='Verbose')
     return argparser
 
@@ -101,8 +101,8 @@ if __name__ == "__main__":
                     print('INACTIVE: ' + user_email)
                 continue
 
-            if args.company:
-                if args.company not in user_email:
+            if args.companyemail:
+                if args.companyemail not in user_email:
                     if args.verbose:
                         print('NOT COMPANY: ' + user_email)
                     continue
@@ -162,8 +162,8 @@ if __name__ == "__main__":
         output = '{} ({}), {}'.format(user_name, user_displayname, user_email)
         if latest_date != now:
             output += ', {} ({})'.format(latest_date, naturaltime(now - latest_date))
-        if args.company:
-            if args.company not in user_email:
+        if args.companyemail:
+            if args.companyemail not in user_email:
                 response = requests.get('https://emailrep.io/' + user_email, json={}, headers = {'Accept': 'application/json'})
                 emailrep = response.json()
                 if emailrep['suspicious'] == True:
