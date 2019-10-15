@@ -7,7 +7,8 @@ This is actually several different scripts but they all share code to check user
 All script dependencies are handled by [Pipenv](https://docs.pipenv.org). To install see [Pipenv & Virtual Environments](https://docs.pipenv.org/en/latest/install/).
 
 To install the dependencies for the scripts type:
-```
+
+```bash
 pipenv install
 ```
 
@@ -15,7 +16,7 @@ pipenv install
 
 Before running you need to get an AWS key by logging in to your account.
 
-```
+```bash
 python CheckAWSUsers.py --profile myprofile --region us-east-1
 ```
 
@@ -27,7 +28,7 @@ python CheckAWSUsers.py --profile myprofile --region us-east-1
 
 ## CheckJiraUsers.py
 
-```
+```bash
 python CheckJiraUsers.py --server=https://jira.mycompany.com --username bob.jones --password NOTMYPASSWORD --company=@mycompany.com
 ```
 
@@ -41,9 +42,8 @@ python CheckJiraUsers.py --server=https://jira.mycompany.com --username bob.jone
 
 ## CheckSlackUsers.py
 
-```
+```bash
 python CheckSlackUsers.py --token=xxxx-0000000000-0000000000-000000000000-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx --companyemail=@mycompany.com
-
 ```
 
 | Short | Long | Description | Required |
@@ -54,7 +54,7 @@ python CheckSlackUsers.py --token=xxxx-0000000000-0000000000-000000000000-xxxxxx
 
 ## CheckTestRailUsers.py
 
-```
+```bash
 python CheckTestRailUsers.py --username bob.jones --password NOTMYPASSWORD
 ```
 
@@ -63,4 +63,16 @@ python CheckTestRailUsers.py --username bob.jones --password NOTMYPASSWORD
 | `-s` | `--server` | | TestRail server URL | Yes |
 | `-u` | `--username` | TestRail username (not email) | Yes |
 | `-p` | `--password` | TestRail password | Yes |
+| `-v` | `--verbose`  | Verbose | No |
+
+## CheckKeenUsers.py
+
+```bash
+python CheckKeenUsers.py --organisation=000000000000000000000000 --authorization=0000000000000000000000000000000000000000000000000000000000000000
+```
+
+| Short | Long | Description | Required |
+| ----- | ---- | ----------- | -------- |
+| `-o` | `--organisation` | Keen.io organisation | Yes |
+| `-c` | `--authorization` | Keen.io authorization | Yes |
 | `-v` | `--verbose`  | Verbose | No |
