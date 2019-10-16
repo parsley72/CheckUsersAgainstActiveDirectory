@@ -14,6 +14,30 @@ pipenv install
 
 ## CheckAWSUsers.py
 
+Our AWS IAM accounts predate our use of AWS Federated Authentication with ActiveDirectory so we want to remove them. Unfortunately the account names didn't follow any particular format so can't be matched up easily to ActiveDirectory accounts. The formats that can be recognised are:
+
+- Email address
+- firstname.lastname (e.g. bob.jones)
+- FirstnameLastname (e.g. BobJones)
+- admin.FirstnameLastname (e.g. admin.BobJones)
+- admin.firstname (e.g. admin.bob)
+
+So the algorithm works as follows:
+
+1. Check to see if the IAM account has a metadata tag "Email". If so lookup this value in ActiveDirectory.
+2. Look up the IAM username in ActiveDirectory.
+3. If this fails:
+    1. Remove 'admin.' from the start of the username, e.g. "admin.bob" -> "bob".
+    2. If no '.' left in the username try adding a space before capitals, e.g. "BobJones" -> "Bob Jones".
+    3. Look up this modifed username in ActiveDirectory.
+4. If this fails:
+    1. If the modified username contains '.' or ' ' then split the username using this character, e.g. "bob.jones" -> ["bob", "jones"].
+    2. Look up the second name (probably the surname) in ActiveDirectory.
+5. If this fails:
+    1. Look up the first name (probably the first/Christian name) in ActiveDirectory.
+
+This won't find every user but it does get most of them. If you have usernames that can't be identified you can add metadata tag "Email" to specify the email address for that user that can be used in the future.
+
 Before running you need to get an AWS key by logging in to your account.
 
 ```bash
