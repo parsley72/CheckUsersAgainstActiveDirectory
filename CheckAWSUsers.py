@@ -155,7 +155,7 @@ if __name__ == "__main__":
                 else:
                     search_string = user_name
                 if '.' not in search_string:
-                    # Insert space after capitals
+                    # Insert space before capitals
                     search_string = re.sub(r"([A-Z])", r" \1", search_string).strip()
 
                 results_array = []
