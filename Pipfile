@@ -1,0 +1,20 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[dev-packages]
+pylint = "*"
+
+[packages]
+"boto3" = "*"
+"adal" = "*"
+"pyperclip" = "*"
+"humanize" = "*"
+"slackclient" = "*"
+"jira" = "*"
+"httplib2" = "*"
+"testrail-api" = "*"
+
+[requires]
+python_version = "3.7"
